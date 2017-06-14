@@ -10,7 +10,7 @@ require 'pry-byebug'
 
 def selects_the_titles_of_all_projects_and_their_pledge_amounts_alphabetized_by_name
 # binding.pry
-"SELECT title, SUM(amount)
+"SELECT projects.title, SUM(pledges.amount)
 FROM projects
 LEFT JOIN pledges
 ON projects.id = pledges.project_id
@@ -19,7 +19,7 @@ end
 
 def selects_the_user_name_age_and_pledge_amount_for_all_pledges_alphabetized_by_name
 # binding.pry
-"SELECT name, age, SUM(amount)
+"SELECT users.name, users.age, SUM(pledges.amount)
 FROM users
 LEFT JOIN pledges
 ON users.id = pledges.user_id
@@ -32,7 +32,7 @@ def selects_the_titles_and_amount_over_goal_of_all_projects_that_have_met_their_
 FROM projects
 LEFT JOIN pledges
 ON projects.id = pledges.project_id
-GROUP BY title
+GROUP BY projects.title
 HAVING SUM(pledges.amount) >= projects.funding_goal"
 end
 
